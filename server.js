@@ -1,6 +1,13 @@
 const express = require('express');
+const connectDb = require('./config/db');
 
 const app = express();
+
+//connect Database
+connectDb()
+
+//init midleware
+app.use(express.json({extended:false}))
 
 app.get('/',(req,res)=>res.send('Hello my world'));
 
