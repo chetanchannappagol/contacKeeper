@@ -4,7 +4,7 @@ const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const User = require("../modals/User");
 const jwt = require('jsonwebtoken');
-const config = require('config')
+const config = require('config');
 
 // @route     POST api/users
 // @desc      Register a new user
@@ -25,7 +25,6 @@ router.post(
     }
     const {name , email, password }= req.body;
 
-    console.log(await User.find());
     try {
         let user = await User.findOne({email:email})
         if(user){
@@ -51,10 +50,7 @@ router.post(
         jwt.sign(payload,config.get('jwtToken'),{expiresIn:10000},(err,token)=>{
             if (err) throw err
             res.json({token:token})
-            config.get('jwtToken') = token;
         })
-        console.log(config.get('jwtToken'));
-        // res.send('user saved')
     } catch (error) {
         console.error(error.message);
         res.status(500).send('server error')

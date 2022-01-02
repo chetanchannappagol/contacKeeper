@@ -9,8 +9,6 @@ connectDb()
 //init midleware
 app.use(express.json({extended:false}))
 
-app.get('/',(req,res)=>res.send('Hello my world'));
-
 app.use('/api/users',require('./Routes/users'));
 
 app.use('/api/auth',require('./Routes/auth'));
