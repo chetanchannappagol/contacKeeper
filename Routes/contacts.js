@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleWare/auth");
-const Contact = require("../modals/Contact");
-const User = require("../modals/User");
+const Contact = require("../models/Contact");
+const User = require("../models/User");
 
 // @route     GET api/contacts
 // @desc      get user contacts
