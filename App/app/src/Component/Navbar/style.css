@@ -1,0 +1,32 @@
+
+.navbar{
+    display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
+  background-color: rgb(44, 36, 128);
+  align-items: center;
+  padding: 0px 10px;
+}
+
+.navUl{
+    display: flex;
+    list-style-type: none;
+}
+
+.navbar span{
+    font-weight: bolder;
+    font-size: larger;
+    color: white;
+}
+
+.navUl li a{
+    text-decoration: none;
+    color: white;
+    margin:  0px 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.navUl li a:hover{
+   color: black;
+}
