@@ -1,33 +1,60 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,useContext, useEffect} from 'react'
 import AlertContext from '../../Contexts/Alert/AlertContext';
+import AuthContext from '../../Contexts/Auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-export default function Register() {
+export default function Register(props) {
+const navigate = useNavigate();
 
-    const context = useContext(AlertContext)
-    const [login, setLogin] = useState({
+  
+    const context = useContext(AlertContext);
+    const Acontext = useContext(AuthContext)
+    const [user, setUser] = useState({
         email:'',
         password:'',
         confirmpassword:'',
         name:''
     })
+    useEffect(() => {
+      if(Acontext.isAuthenticated){
+        navigate('/')
+      }
+      if(Acontext.errors){
+        context.setAlert({alert:Acontext.errors,type:'danger'})
+        Acontext.clearError()
+      }
+      // eslint-disable-next-line
+    }, [Acontext.errors,Acontext.isAuthenticated]);
+    
 
-    const {email,password,confirmpassword,name} = login;
+    const {email,password,confirmpassword,name} = user;
 
     const onChange = (e) =>{
-        setLogin({
-            ...login,[e.target.name]:e.target.value
+        setUser({
+            ...user,[e.target.name]:e.target.value
         })
     }
 
-    const onSubmit = () =>{
+    const onSubmit = (e) =>{
+       e.preventDefault()
         if(email === '' || password === '' || confirmpassword === '' || name === ''){
             context.setAlert({alert:'All fields are mandatory',type:'warning'})
+        }
+        else if(password !== confirmpassword){
+          context.setAlert({alert:'Confirm password is wrong',type:'warning'})
+        }
+        else{
+          Acontext.register({
+            email,
+            password,
+            name
+          })
         }
     }
 
   return (
       <div style={{width:'100%',display:'flex',justifyContent:'center',padding:'20px 0px'}}>
- <form>
+ <form onSubmit={onSubmit}>
       <span>Account Registration</span>
       <input
         type="name"
@@ -35,6 +62,7 @@ export default function Register() {
         placeholder="Name"
         onChange={(e) => onChange(e)}
         value={name}
+        required
       />
       <input
         type="email"
@@ -42,6 +70,7 @@ export default function Register() {
         placeholder="Email"
         onChange={(e) => onChange(e)}
         value={email}
+        required
       />
       <input
         type="password"
@@ -49,6 +78,8 @@ export default function Register() {
         placeholder="Password"
         onChange={(e) => onChange(e)}
         value={password}
+        required
+        minLength={6}
       />
       <input
         type="password"
@@ -56,11 +87,11 @@ export default function Register() {
         placeholder="Confirm Password"
         onChange={(e) => onChange(e)}
         value={confirmpassword}
+        required
       />
       <input
         className="button"
-        onClick={() => onSubmit()}
-        type="button"
+        type="submit"
         value={"Register"}
       />
     </form>
