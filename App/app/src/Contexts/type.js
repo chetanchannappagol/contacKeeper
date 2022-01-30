@@ -4,6 +4,7 @@ export const EDIT_CONTACT = 'EDIT_CONTACT';
 export const CLEAR_EDIT = 'CLEAR_EDIT';
 export const DELETE_CONTACT = 'DELETE_CONTACT';
 export const SELECTED_CONTACT = 'SELECTED_CONTACT';
+export const GET_CONTACTS = 'GET_CONTACTS';
 
 //Alert types
 export const SET_ALERT = 'SET_ALERT';

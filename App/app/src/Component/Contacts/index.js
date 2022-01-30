@@ -7,7 +7,7 @@ export default function Contacts() {
     return (
         <div>
             {
-                context.contacts.map(ele=> <ContaactItem key={ele.id} contact={ele}/> )
+              context.contacts.length > 0 &&  context.contacts.map((ele,i)=> <ContaactItem  key={i} contact={ele}/> )
             }
         </div>
     )

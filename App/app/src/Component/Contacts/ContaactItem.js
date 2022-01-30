@@ -14,7 +14,7 @@ export default function ContaactItem(props) {
         context.DeleteContact(props.contact)
     }
     return (
-        <div className='contactItem' key={props.contact.email}>
+        <div className='contactItem' >
            <div className='nameType'>
                <span>{name}</span>
                <span className={type === 'personal' ? 'type1' :'type2'}>{type}</span>
