@@ -58,7 +58,7 @@ router.post(
 
 // @route     PUT api/contacts/:id
 // @desc      update user contact
-// @access    Public
+// @access    Publics
 router.put("/:id", auth, async (req, res) => {
   // res.send('update user contact')
   const { name, email, phone, type } = req.body;
